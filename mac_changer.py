@@ -30,13 +30,13 @@ def get_current_mac(interface):
     ifconfig_result = (subprocess.check_output(
         ["ifconfig", interface])).decode("utf-8")
 
-    print(ifconfig_result)
+    # print(ifconfig_result)
 
     mac_address_search_result = re.search(
         r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", ifconfig_result)
 
     if mac_address_search_result:
-        print(mac_address_search_result.group(0))
+        return mac_address_search_result.group(0)
     else:
         print("[-] Could not read MAC address.")
 
@@ -44,3 +44,5 @@ def get_current_mac(interface):
 options = get_arguments()
 current_mac = get_current_mac(options.interface)
 print("Current MAC = " + str(current_mac))
+
+# change_mac(options.interface, options.new_mac)
